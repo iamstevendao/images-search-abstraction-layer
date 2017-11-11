@@ -4,4 +4,4 @@ used the [iamstevendao/boilerplate-nodejs](https://github.com/iamstevendao/boile
 
 Demo on Glitch: https://iamsd-images-search.glitch.me/
 
-made with :heart: by [Steven](https://github.com/iamstevendao).
+made with &#x2764; by [Steven](https://github.com/iamstevendao).

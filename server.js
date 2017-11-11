@@ -47,6 +47,11 @@ if (app.get('env') === 'production') {
   })
 }
 
+// 404
+app.use((req, res, next) => {
+  res.render('404')
+})
+
 app.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'))
 })
