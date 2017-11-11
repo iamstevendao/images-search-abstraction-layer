@@ -18,6 +18,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.2.1",
     "express-validator": "^2.20.4",
+    "google-images": "^2.1.0",
     "less": "^2.7.1",
     "method-override": "^2.3.5",
     "mongodb": "^2.2.33",
