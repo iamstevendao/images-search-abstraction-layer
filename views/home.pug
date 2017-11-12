@@ -27,7 +27,13 @@ block content
               .col-sm-2
                 button.btn.btn-success(type='submit') Search
       if images
-        for image in images
-          img(src=image.url)
+        .panel
+          .panel-heading
+            h2.panel-title Result
+            p.font-weight-light Click on the thumbnail to access the original image.
+          .panel-body
+            for image in images
+              a(href=image.original)
+                img(src=image.thumbnail)
 
       

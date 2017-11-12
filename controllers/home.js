@@ -3,13 +3,15 @@ const GoogleImages = require('google-images')
 const client = new GoogleImages(process.env.CSE_ID, process.env.API_KEY)
 
 exports.index = (req, res) => {
+  // return a null array
   resObject = { title: 'Home', images: [] }
   res.render('home', resObject)
 }
 
 exports.search = (req, res) => {
   // query the search string
-  let query = req.body.query // requested url
+  let query = req.body.query
+  // requested url
   let resUrl = req.protocol + '://' + req.get('host') + req.originalUrl
 
   // redirect to the result page
@@ -18,30 +20,24 @@ exports.search = (req, res) => {
 
 exports.result = (req, res) => {
   // redirect to the result page
-  resObject = { title: 'Home' }
-  resObject.images = []
-  client.search(req.params.query, { num: 2, page: 1 })
+  let query = req.params.query
+  resObject = { title: 'Home', request: query } // response object
+  resObject.images = [] // array contains thumbnail and original image links
+  client.search(query, { page: 1 })
     .then(images => {
+      // handle the result
       images.forEach(image => {
-        resObject.images.push(image.url)
+        // push to the images array a object includes the thumbnail and original image
+        resObject.images.push(
+          {
+            thumbnail: image.thumbnail.url,
+            original: image.url
+          })
       })
       res.render('home', resObject)
-      // res.json(images)
-      /*
-      [{
-        "url": "http://steveangello.com/boss.jpg",
-        "type": "image/jpeg",
-        "width": 1024,
-        "height": 768,
-        "size": 102451,
-        "thumbnail": {
-          "url": "http://steveangello.com/thumbnail.jpg",
-          "width": 512,
-          "height": 512
-        }
-      }]
-       */
+
     }).catch((err) => {
+      // if failed, log and end the response
       console.log(err)
       res.end()
     })
