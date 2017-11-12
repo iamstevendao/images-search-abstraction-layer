@@ -3,9 +3,8 @@ const GoogleImages = require('google-images')
 const client = new GoogleImages(process.env.CSE_ID, process.env.API_KEY)
 
 exports.index = (req, res) => {
-  res.render('home', {
-    title: 'Home'
-  })
+  resObject = { title: 'Home', images: [] }
+  res.render('home', resObject)
 }
 
 exports.search = (req, res) => {
@@ -19,9 +18,9 @@ exports.search = (req, res) => {
 
 exports.result = (req, res) => {
   // redirect to the result page
-  resObject = {}
+  resObject = { title: 'Home' }
   resObject.images = []
-  client.search(req.params.query, { page: 1 })
+  client.search(req.params.query, { num: 2, page: 1 })
     .then(images => {
       images.forEach(image => {
         resObject.images.push(image.url)
@@ -46,10 +45,4 @@ exports.result = (req, res) => {
       console.log(err)
       res.end()
     })
-  // paginate results
-  //client.search('Steve Angello', { page: 2 });
-
-  // search for certain size
-  //client.search('Steve Angello', { size: 'large' });
-  //res.end()
 }

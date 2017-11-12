@@ -26,7 +26,8 @@ block content
                 input.form-control(type='text', name='query', id='query', autofocus=true, value=request)
               .col-sm-2
                 button.btn.btn-success(type='submit') Search
-      each image in images  
-        img(src=image)
+      if images
+        for image in images
+          img(src=image.url)
 
       
